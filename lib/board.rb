@@ -1,7 +1,5 @@
-require "Interface"
 class Board
-
-    include Interface
+    include Interface 
     attr_accessor :board
 
     def initialize
@@ -25,7 +23,13 @@ class Board
     
 
     end
+
+    def test 
+        puts "testing"
+    end
     
 end
+
+
 feild = Board.new
-feild.display
+feild.display([1,2,3,4,5,6,7,8,9])
