@@ -1,5 +1,7 @@
+require "Interface"
 class Board
 
+    include Interface
     attr_accessor :board
 
     def initialize
@@ -20,8 +22,10 @@ class Board
     end
 
     def winner?
-        if "X" == @winning_combinations
+    
 
     end
     
 end
+feild = Board.new
+feild.display
