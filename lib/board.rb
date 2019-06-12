@@ -1,3 +1,4 @@
+require_relative '../lib/interface.rb'
 class Board
     include Interface 
     attr_accessor :board
@@ -23,13 +24,10 @@ class Board
     
 
     end
-
-    def test 
-        puts "testing"
-    end
     
 end
 
 
 feild = Board.new
-feild.display([1,2,3,4,5,6,7,8,9])
+feild.welcome
+
