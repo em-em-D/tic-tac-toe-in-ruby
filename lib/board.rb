@@ -26,7 +26,6 @@ end
 test = Board.new
 
 test.add_symbol(3,"X")
-test.add_symbol()
 test.generate_board
 
 test.space_taken?(3)
