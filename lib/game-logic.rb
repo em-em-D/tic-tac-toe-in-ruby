@@ -27,6 +27,19 @@ class GameLogic
         end
     end
 
+    def get_input(player)
+        symbol = player.player_symbol
+        puts "#{player.name}, enter the cell number that you would like to use (1-9):"
+        input = gets.chomp.to_i
+        puts "Invalid input. Please choose a number between 1 and 9" if !valid_input?(input)
+        puts "Cell taken." if @board.space_taken?(input)
+        @board.add_symbol(input,symbol)
+    end
+
+    def valid_input?(input)
+        return input > 0 && input <= 9
+    end
+
 
 
     def draw?
