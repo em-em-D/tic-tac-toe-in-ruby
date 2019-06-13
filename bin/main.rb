@@ -39,7 +39,7 @@ class TicTacToeRunner
     end
   
   
-    def play_again #asks user if they want to play again
+    def play_again 
         loop do
             puts "Would you like to play again? If \"Yes\" enter Y or \"No\" enter N (Y/N)"
             input= gets.chomp.upcase
