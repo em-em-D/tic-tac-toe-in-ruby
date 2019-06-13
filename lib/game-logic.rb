@@ -1,3 +1,6 @@
+require_relative 'player.rb'
+require_relative 'board.rb'
+
 class Game
     attr_accessor :player1, :player2, :turn, :board
   
@@ -62,8 +65,8 @@ class Game
     end
   
     def check_winner(player) 
-      @@winning_positions.each do |triplet|
-        @winner = player.name if triplet.all? { |a| @board.spaces[a] == player.sym }
+      @@winning_positions.each do |array|
+        @winner = player.name if array.all? { |a| @board.spaces[a] == player.sym }
       end
       if @winner == player.name
         puts "#{player.name} is the winner!"
