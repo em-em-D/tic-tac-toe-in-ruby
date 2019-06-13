@@ -15,17 +15,16 @@ class Board
     end
 
     def add_symbol(position, symbol) 
-      @spaces[position-1] = symbol
+      @spaces[position] = symbol
     end
 
     def space_taken?(position) 
-      return @spaces[position-1] == "X" || @spaces[position-1] == "O"
+      return @spaces[position] == "X" || @spaces[position] == "O"
     end
 
+    def board_full
+      @spaces.all? { |x|
+        x.is_a? String 
+      }
+    end
 end
-test = Board.new
-
-test.add_symbol(3,"X")
-test.generate_board
-
-test.space_taken?(3)

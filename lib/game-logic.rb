@@ -1,55 +1,77 @@
-class GameLogic
-    attr_accessor :player1, :player2 , :board , :turn 
-    @@winning_combo =[ [1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
-    def initialize(player1,player2,board)
-        @player1 =player1
-        @player2 = player2
-        @board = board
-        @current_turn = @player1
-        @turns = 1 
-        @winner = ""
+class Game
+    attr_accessor :player1, :player2, :turn, :board
+  
+    @@winning_positions = [
+      [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]
+    ]
+  
+    def initialize(player1, player2, board)
+      @player1 = player1
+      @player2 = player2
+      @board = board
+  
+      @current_turn = 1
+      @first_turn = @player1.name
+      @winner = ""
+  
+      play
     end
-    def player_symbol
-        @player1.sym = "X"
-        @player2.sym = "O"
+  
+    def play 
+      allocate_symbols
+      take_turns
     end
-
-    def next_turn
-        until draw? || @winner != ""
-            if @current_turn == @player1 
-                @current_turn = @player2
-                @turns +=1
-
-            elsif @current_turn == @player2
-                @current_turn = @player1
-                @turns +=1 
-            end
-        end
+  
+    def allocate_symbols 
+      @player1.sym = "X"
+      @player2.sym = "O"
     end
-
-    def get_input(player)
-        symbol = player.player_symbol
-        puts "#{player.name}, enter the cell number that you would like to use (1-9):"
+  
+    def take_turns 
+      until draw? || @winner != ""
+          (@current_turn.even?) ? turn(@player2) : turn(@player1)
+      end
+      puts "Game was a draw!" if draw? 
+    end
+  
+    def turn(player) 
+      puts "Turn #{@current_turn}:"
+      puts "---------------------------\n"
+      @board.generate_board
+      @board.add_symbol(get_valid_position(player), player.sym)
+      check_winner(player)
+      @current_turn += 1
+    end
+  
+    def get_valid_position(player) 
+      input = 0
+      until valid_input?(input)
+        print "#{player.name}, enter the cell number that you would like to use (1-9): "
         input = gets.chomp.to_i
-        puts "Invalid input. Please choose a number between 1 and 9" if !valid_input?(input)
-        puts "Cell taken." if @board.space_taken?(input)
-        @board.add_symbol(input,symbol)
+        print "Invalid input! " unless valid_input?(input)
+        puts "Number is not in range 1-9" unless (input > 0 && input < 10)
+        puts "Cell taken." if @board.space_taken?(input - 1)
+      end
+      input - 1
     end
-
-    def valid_input?(input)
-        return input > 0 && input <= 9
+  
+    
+  
+    def draw? 
+      (@board.board_full == true) && (@winner == "")
     end
-
-
-
-    def draw?
-        (@turns == @board.spaces.length) && (@winner == "")
+  
+    def check_winner(player) 
+      @@winning_positions.each do |triplet|
+        @winner = player.name if triplet.all? { |a| @board.spaces[a] == player.sym }
+      end
+      if @winner == player.name
+        puts "#{player.name} is the winner!"
+      end
     end
-
-    def check_winner?(player)
-
+  
+    def valid_input?(input) 
+      return input > 0 && input < 10 && !@board.space_taken?(input - 1)
     end
-
-
 end
 

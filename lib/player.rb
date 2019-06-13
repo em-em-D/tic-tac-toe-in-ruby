@@ -1,5 +1,5 @@
 class Player
-    attr_accessor :player :sym
+    attr_accessor :name , :sym
     def initialize(name)
         @name = name
     end
