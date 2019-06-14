@@ -69,6 +69,7 @@ class Game
         @winner = player.name if array.all? { |a| @board.spaces[a] == player.sym }
       end
       if @winner == player.name
+        @board.generate_board
         puts "#{player.name} is the winner!"
       end
     end
