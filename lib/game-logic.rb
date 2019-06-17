@@ -14,7 +14,7 @@ class Game
       @board = board
   
       @current_turn = 1
-      @first_turn = @player1.name
+      @first_turn = @player1
       @winner = ""
   
       play
@@ -24,7 +24,7 @@ class Game
       allocate_symbols
       take_turns
     end
-  
+    
     def allocate_symbols 
       @player1.sym = "X"
       @player2.sym = "O"
@@ -69,6 +69,8 @@ class Game
         @winner = player.name if array.all? { |a| @board.spaces[a] == player.sym }
       end
       if @winner == player.name
+        puts "\n"
+        @board.generate_board
         puts "#{player.name} is the winner!"
       end
     end
