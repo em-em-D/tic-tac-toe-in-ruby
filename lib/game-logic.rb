@@ -21,14 +21,14 @@ class Game
     end
   
     def play 
-      allocate_symbols
+      # allocate_symbols
       take_turns
     end
     
-    def allocate_symbols 
-      @player1.sym = "X"
-      @player2.sym = "O"
-    end
+    # def allocate_symbols 
+    #   @player1.sym = "X"
+    #   @player2.sym = "O"
+    # end
   
     def take_turns 
       until draw? || @winner != ""

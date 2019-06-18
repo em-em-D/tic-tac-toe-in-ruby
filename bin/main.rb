@@ -34,7 +34,7 @@ class TicTacToeRunner
   
     def game_start 
       board = Board.new
-      player1, player2 = Player.new(@name1), Player.new(@name2)
+      player1, player2 = Player.new(@name1,"X"), Player.new(@name2,"O")
       game = Game.new(player1, player2, board)
     end
   
