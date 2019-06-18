@@ -6,8 +6,6 @@ RSpec.describe Game do
       player1 = double("Player")
       player2 = double("Player")
       board = double("Board")
-      allow(player1).to receive(:sym) { 'X'}
-      allow(player2).to receive(:sym) { 'O'}  
       allow(board).to receive(:space_taken?){false} 
       game = Game.new(player1, player2, board) 
       expect(game.valid_input?(1)).to eql(true)

@@ -34,6 +34,8 @@ class Game
       until draw? || @winner != ""
           (@current_turn.even?) ? turn(@player2) : turn(@player1)
       end
+      puts "\n"
+      @board.generate_board
       puts "Game was a draw!" if draw? 
     end
   
