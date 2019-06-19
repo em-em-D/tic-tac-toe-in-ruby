@@ -17,19 +17,9 @@ class Game
       @first_turn = @player1
       @winner = ""
   
-      play
-    end
-  
-    def play 
-      # allocate_symbols
       take_turns
     end
-    
-    # def allocate_symbols 
-    #   @player1.sym = "X"
-    #   @player2.sym = "O"
-    # end
-  
+
     def take_turns 
       until draw? || @winner != ""
           (@current_turn.even?) ? turn(@player2) : turn(@player1)
@@ -45,6 +35,7 @@ class Game
       @board.generate_board
       @board.add_symbol(get_valid_position(player), player.sym)
       check_winner(player)
+      display_winner(player)
       @current_turn += 1
     end
   
@@ -70,6 +61,9 @@ class Game
       @@winning_positions.each do |array|
         @winner = player.name if array.all? { |a| @board.spaces[a] == player.sym }
       end
+    end
+
+    def display_winner(player)
       if @winner == player.name
         puts "\n"
         @board.generate_board
